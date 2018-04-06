@@ -26,6 +26,10 @@
 #include "util/string_util.h"
 #include "util/sync_point.h"
 
+/*sy*/
+#include <sstream>
+// include header for the string info
+
 namespace rocksdb {
 
 namespace {
