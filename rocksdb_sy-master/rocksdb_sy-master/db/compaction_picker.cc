@@ -413,6 +413,13 @@ bool CompactionPicker::SetupOtherInputs(
   // Get the range one last time.
   GetRange(*inputs, &smallest, &largest);
 
+  /* start */
+  fprintf(stderr, "\n\nInput range[level%d]: %s ~ %s\n",
+	  input_level,
+	  smallest.user_key().ToString(true).c_str(),
+	  largest.user_key().ToString(true).c_str());
+  /* end */
+
   // Populate the set of next-level files (inputs_GetOutputLevelInputs()) to
   // include in compaction
   vstorage->GetOverlappingInputs(output_level, &smallest, &largest,
