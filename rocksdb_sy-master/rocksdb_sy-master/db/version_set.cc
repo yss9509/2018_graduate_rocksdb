@@ -1875,6 +1875,24 @@ void VersionStorageInfo::GetOverlappingInputsRangeBinarySearch(
   // insert overlapping files into vector
   for (int i = start_index; i <= end_index; i++) {
     inputs->push_back(files_[level][i]);
+
+	/* sy start */
+	FdWithKeyRange* fs = &(level_files_brief_[level].files[i]);
+
+	Slice fstart = ExtractUserKey(fs->smallest_key);
+	Slice fend = ExtractUserKey(fs->largest_key);
+
+	InternalKey oskey;
+	InternalKey oekey;
+
+	oskey.DecodeFrom(fstart);
+	oekey.DecodeFrom(fend);
+
+	fprintf(stderr, "Output range[level%d]: %s ~ %s\n",
+		level,
+		oskey.user_key().ToString(true).c_str(),
+		oekey.user_key().ToString(true).c_str());
+	/* end */
   }
 }
 
