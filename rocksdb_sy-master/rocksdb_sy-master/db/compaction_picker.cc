@@ -413,7 +413,7 @@ bool CompactionPicker::SetupOtherInputs(
   // Get the range one last time.
   GetRange(*inputs, &smallest, &largest);
 
-  /* start */
+  /*sy start */
   fprintf(stderr, "\n\nInput range[level%d]: %s ~ %s\n",
 	  input_level,
 	  smallest.user_key().ToString(true).c_str(),
@@ -425,6 +425,15 @@ bool CompactionPicker::SetupOtherInputs(
   vstorage->GetOverlappingInputs(output_level, &smallest, &largest,
                                  &output_level_inputs->files, *parent_index,
                                  parent_index);
+  /* sy start */
+  if (!output_level_inputs->empty()) {
+	  fprintf(stderr, "Output range is determined\n");
+  }
+  else {
+	  fprintf(stderr, "Output range is not determined\n");
+  }
+  /* end */
+
   if (AreFilesInCompaction(output_level_inputs->files)) {
     return false;
   }
