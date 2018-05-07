@@ -510,6 +510,12 @@ bool CompactionPicker::SetupOtherInputs(
       inputs->files = expanded_inputs.files;
     }
   }
+
+  /* sy start*/
+
+  fprintf(stderr, "Input/Output range[%d-%d] was determined = %f\n",
+	  input_level, output_level);
+  /* end */
   return true;
 }
 
